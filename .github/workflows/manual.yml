@@ -17,9 +17,6 @@ jobs:
       - name: List output files
         run: ls
 
-      - name: SFTP Deploy
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-
       - name: Set remote for live
         if: ${{ github.ref_name == 'main' }}
         run: |
@@ -30,6 +27,8 @@ jobs:
         run: |
           echo "REMOTE_PATH=/home/git_dep_test/staging_folder/"
 
+      - name: SFTP Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_HOST1 }}
           username: ${{ secrets.FTP_USERNAME }}
