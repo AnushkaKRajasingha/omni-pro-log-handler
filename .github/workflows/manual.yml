@@ -1,24 +1,23 @@
+name: sftp-upload
 on:
   push:
-    branches:    
-      - main
+    branches:[main]
       
 jobs:
-  omni-pro-log-handler:
-    name: SFTP-File-Upload
+  deploy:
+    name: Deploy code on Every push
     runs-on: ubuntu-latest
     steps:
-    - name: List output files
-      run: ls
+      - name: Get Lates code
+        uses: actions/checkout@main
 
-    - uses: actions/checkout@main
+      - name: List output files
+        run: ls
 
-    - name: omni-pro-log-handler
-      uses: AnushkaKRajasingha/omni-pro-log-handler@main
-      env:
-        FTP_SERVER: ${{ secrets.FTP_HOST }}
-        FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-        FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        LOCAL_DIR: ${{ secrets.FTP_REMOTE_PATH }}
-        METHOD: sftp
-        PORT: 22
+      - name: Upload files
+        uses: ${{ secrets.FTP_REMOTE_PATH }}
+        with:
+          FTP_SERVER: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          METHOD: sftp
