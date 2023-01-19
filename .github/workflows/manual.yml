@@ -2,17 +2,21 @@ name: sftp-upload
 
 on:
   push:
-    branches: [staging]
+    branches: [staging,main]
       
 jobs:
   deploy:
     name: Deploy code on Every push
     runs-on: ubuntu-latest
     steps:
+      - name: Git branch name
+        id: git-branch-name
+        uses: EthanSK/git-branch-name-action@v1
+
       - name: Get Lates code
         uses: actions/checkout@v1
         with:
-          ref: 'staging'
+          ref: ${GIT_BRANCH_NAME}
 
       - name: List output files
         run: ls
@@ -24,5 +28,5 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: /home/git_dep_test/
+          remote_path: /home/git_dep_test/${GIT_BRANCH_NAME}/
           sftp_only: true
