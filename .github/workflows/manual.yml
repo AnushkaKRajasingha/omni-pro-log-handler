@@ -8,11 +8,11 @@ jobs:
     name: SFTP-File-Upload
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
-        
     - name: List output files
       run: ls
-      
+
+    - uses: actions/checkout@main
+
     - name: omni-pro-log-handler
       uses: AnushkaKRajasingha/omni-pro-log-handler@main
       env:
