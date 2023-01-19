@@ -33,5 +33,5 @@ jobs:
           server: ${{ secrets.FTP_HOST1 }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: env.REMOTE_PATH
+          remote_path: $env.REMOTE_PATH
           sftp_only: true
