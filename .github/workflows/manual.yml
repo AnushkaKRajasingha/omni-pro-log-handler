@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Lates code
-        uses: actions/checkout@staging
+        uses: actions/checkout
 
       - name: List output files
         run: ls
