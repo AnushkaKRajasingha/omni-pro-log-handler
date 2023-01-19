@@ -16,7 +16,7 @@ jobs:
         run: ls
 
       - name: Upload files
-        uses: ./
+        uses: AnushkaKRajasingha/omni-pro-log-handler@main
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
