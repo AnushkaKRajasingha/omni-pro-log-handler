@@ -21,8 +21,14 @@ jobs:
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
 
         with:
-          server: ${{ secrets.FTP_HOST }}
+          server: ${{ secrets.FTP_HOST1 }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: /home/git_dep_test/${{github.ref_name}}/
+          run: |
+            if [${{ github.ref_name == 'main' }}]; then
+              echo "remote_path = /home/git_dep_test/main_folder/"
+            fi
+            if [${{ github.ref_name == 'staging' }}]; then
+            echo "remote_path = /home/git_dep_test/staging_folder/"
+            fi
           sftp_only: true
