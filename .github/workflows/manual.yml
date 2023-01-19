@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Git branch name
         id: git-branch-name
+        using: "node16"
         uses: EthanSK/git-branch-name-action@v1
 
       - name: Get Lates code
