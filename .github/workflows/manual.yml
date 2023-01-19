@@ -15,11 +15,12 @@ jobs:
       - name: List output files
         run: ls
 
-      - name: Upload files
-        uses: AnushkaKRajasingha/omni-pro-log-handler@main
+      - name: SFTP Deploy
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /home/git_dep_test/
-          protocol: ftps
+          remote_path: /home/git_dep_test/
+          sftp_only: true
