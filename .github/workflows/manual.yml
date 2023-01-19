@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Get Lates code
         uses: actions/checkout
+        with:
+          ref: 'staging'
 
       - name: List output files
         run: ls
