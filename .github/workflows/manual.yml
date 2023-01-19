@@ -14,7 +14,6 @@ jobs:
       run: ls
       
     - name: omni-pro-log-handler
-      uses: AnushkaKRajasingha/omni-pro-log-handler@1.0.0
       env:
         FTP_SERVER: ${{ secrets.FTP_HOST }}
         FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
