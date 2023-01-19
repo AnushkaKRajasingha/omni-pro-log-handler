@@ -16,9 +16,10 @@ jobs:
         run: ls
 
       - name: Upload files
-        uses: ${{ secrets.FTP_REMOTE_PATH }}
+        uses: ./
         with:
           FTP_SERVER: ${{ secrets.FTP_HOST }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          LOCAL_DIR: ${{ secrets.FTP_REMOTE_PATH }}
           METHOD: sftp
