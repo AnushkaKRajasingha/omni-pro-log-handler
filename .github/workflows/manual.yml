@@ -12,7 +12,7 @@ jobs:
       - name: Get Lates code
         uses: actions/checkout@v1
         with:
-          ref: ${GITHUB_REF_NAME}
+          ref: $GITHUB_REF_NAME
 
       - name: List output files
         run: ls
@@ -24,5 +24,5 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: /home/git_dep_test/${GITHUB_REF_NAME}/
+          remote_path: /home/git_dep_test/$GITHUB_REF_NAME/
           sftp_only: true
