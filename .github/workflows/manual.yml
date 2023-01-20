@@ -18,16 +18,14 @@ jobs:
         run: ls
 
       - name: Set remote for live
-        if: ${{ github.ref_name}}  == 'main'
-        env:
-          REMOTE_PATH: /home/git_dep_test/main_folder/
-
+        run: |
+          echo "REMOTE_PATH=/home/git_dep_test/main_folder/"
+        if: ${{ github.ref_name }} == 'main'
 
       - name: Set remote for staging
+        run: |
+          echo "REMOTE_PATH=/home/git_dep_test/staging_folder/"
         if: ${{ github.ref_name }} == 'staging'
-        env:
-          REMOTE_PATH: /home/git_dep_test/staging_folder/
-
 
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
