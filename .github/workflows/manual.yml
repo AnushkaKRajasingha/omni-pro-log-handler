@@ -27,6 +27,7 @@ jobs:
         run: |
           REMOTE_SRV_PATH=/home/git_dep_test/staging_folder/
           echo "$REMOTE_SRV_PATH"
+          echo "secrets.FTP_USERNAME"
         if: ${{ github.ref_name == 'staging'}}
 
       - name: SFTP Deploy
@@ -35,5 +36,5 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: echo "$REMOTE_SRV_PATH"
+          remote_path: ${{ REMOTE_SRV_PATH }}
           sftp_only: true
