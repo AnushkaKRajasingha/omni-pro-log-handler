@@ -7,6 +7,8 @@ on:
 jobs:
   deploy:
     name: Deploy code on Every push
+    env:
+      REMOTE_SRV_PATH: /home/git_dep_test/default_folder/
     runs-on: ubuntu-latest
     steps:
       - name: Get Lates code
