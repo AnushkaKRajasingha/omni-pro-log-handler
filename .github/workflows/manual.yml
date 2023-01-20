@@ -2,7 +2,7 @@ name: sftp-upload
 
 on:
   push:
-    branches: [main]
+    branches: [staging]
       
 jobs:
   deploy:
@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Lates code
-        uses: actions/checkout@main
+        uses: actions/checkout@v1
+        with:
+          ref: 'staging'
 
       - name: List output files
         run: ls
