@@ -18,13 +18,13 @@ jobs:
         run: ls
 
       - name: Set remote for live
-        if: ${{ github.ref_name == 'main' }}
+        if: ${{ github.ref_name}}  == 'main'
         env:
           REMOTE_PATH: /home/git_dep_test/main_folder/
 
 
       - name: Set remote for staging
-        if: ${{ github.ref_name == 'staging' }}
+        if: ${{ github.ref_name }} == 'staging'
         env:
           REMOTE_PATH: /home/git_dep_test/staging_folder/
 
