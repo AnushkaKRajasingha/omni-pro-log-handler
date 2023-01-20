@@ -19,14 +19,14 @@ jobs:
 
       - name: Set remote for live
         run: |
-          REMOTE_SRV_PATH=/home/git_dep_test/main_folder/
-          echo "$REMOTE_SRV_PATH"
+          env.REMOTE_SRV_PATH=/home/git_dep_test/main_folder/
+          echo "$env.REMOTE_SRV_PATH"
         if: ${{ github.ref_name == 'main'}}
 
       - name: Set remote for staging
         run: |
-          REMOTE_SRV_PATH=/home/git_dep_test/staging_folder/
-          echo "$REMOTE_SRV_PATH"
+          env.REMOTE_SRV_PATH=/home/git_dep_test/staging_folder/
+          echo "$env.REMOTE_SRV_PATH"
         if: ${{ github.ref_name == 'staging'}}
 
       - name: SFTP Deploy
@@ -35,6 +35,5 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          run: |
-            remote_path: $REMOTE_SRV_PATH
+          remote_path: ${{ env.REMOTE_SRV_PATH }}
           sftp_only: true
