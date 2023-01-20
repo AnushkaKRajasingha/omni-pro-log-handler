@@ -4,32 +4,10 @@ on:
   push:
     branches: [staging,main]
 
-    env:
-      REMOTE_SRV_PATH: /home/git_dep_test/default_folder/
+env:
+  REMOTE_SRV_PATH: /home/git_dep_test/defult_folder/
 
 jobs:
-  set_env_vars:
-    name: Set Evn Vars
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set remote for live
-        env:
-          REMOTE_SRV_PATH: /home/git_dep_test/main_folder/
-        run: |
-          echo "${{env.REMOTE_SRV_PATH}}"
-        if: ${{ github.ref_name == 'main'}}
-
-      - name: Set remote for staging
-        env:
-          REMOTE_SRV_PATH: /home/git_dep_test/staging_folder/
-        run: |
-          echo "${{env.REMOTE_SRV_PATH}}"
-        if: ${{ github.ref_name == 'staging'}}
-
-      - name: test var
-        run: |
-          echo "${{ env.REMOTE_SRV_PATH }}"
-
   deploy:
     name: Deploy code on Every push
     runs-on: ubuntu-latest
@@ -41,6 +19,16 @@ jobs:
 
       - name: List output files
         run: ls
+
+      - name: Set remote for live
+        run: |
+          echo "REMOTE_SRV_PATH=/home/git_dep_test/main_folder/" >>  "$GITHUB_ENV"
+        if: ${{ github.ref_name == 'main'}}
+
+      - name: Set remote for staging
+        run: |
+          echo "REMOTE_SRV_PATH=/home/git_dep_test/staging_folder/" >>  "$GITHUB_ENV"
+        if: ${{ github.ref_name == 'staging'}}
 
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
