@@ -31,11 +31,15 @@ jobs:
           echo "${{env.REMOTE_SRV_PATH}}"
         if: ${{ github.ref_name == 'staging'}}
 
+      - name: test var
+        run: |
+          echo "${{ env.REMOTE_SRV_PATH }}"
+
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: ${{env.REMOTE_SRV_PATH}}
+          remote_path: ${{ env.REMOTE_SRV_PATH }}
           sftp_only: true
