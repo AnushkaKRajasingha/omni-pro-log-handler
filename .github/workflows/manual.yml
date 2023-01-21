@@ -18,6 +18,9 @@ jobs:
           fetch-depth: 2
           ref: ${{github.ref_name}}
 
+      - name: Diff
+        run: git diff HEAD^ HEAD
+
       - name: List output files
         run: ls
 
@@ -31,11 +34,11 @@ jobs:
           echo "REMOTE_SRV_PATH=/home/git_dep_test/staging_folder/" >>  "$GITHUB_ENV"
         if: ${{ github.ref_name == 'staging'}}
 
-      - name: SFTP Deploy
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: ${{ env.REMOTE_SRV_PATH }}
-          sftp_only: true
+#      - name: SFTP Deploy
+#        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+#        with:
+#          server: ${{ secrets.FTP_HOST }}
+#          username: ${{ secrets.FTP_USERNAME }}
+#          password: ${{ secrets.FTP_PASSWORD }}
+#          remote_path: ${{ env.REMOTE_SRV_PATH }}
+#          sftp_only: true
