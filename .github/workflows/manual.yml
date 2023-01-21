@@ -2,8 +2,11 @@ name: sftp-upload
 
 on:
   push:
-    branches: [staging]
-      
+    branches: [staging,main]
+
+env:
+  REMOTE_SRV_PATH: /home/git_dep_test/defult_folder/
+
 jobs:
   deploy:
     name: Deploy code on Every push
@@ -12,17 +15,27 @@ jobs:
       - name: Get Lates code
         uses: actions/checkout@v1
         with:
-          ref: 'staging'
+          fetch-depth: 1
+          ref: ${{github.ref_name}}
 
       - name: List output files
         run: ls
 
+      - name: Set remote for live
+        run: |
+          echo "REMOTE_SRV_PATH=/home/git_dep_test/main_folder/" >>  "$GITHUB_ENV"
+        if: ${{ github.ref_name == 'main'}}
+
+      - name: Set remote for staging
+        run: |
+          echo "REMOTE_SRV_PATH=/home/git_dep_test/staging_folder/" >>  "$GITHUB_ENV"
+        if: ${{ github.ref_name == 'staging'}}
+
       - name: SFTP Deploy
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          remote_path: /home/git_dep_test/
+          remote_path: ${{ env.REMOTE_SRV_PATH }}
           sftp_only: true
