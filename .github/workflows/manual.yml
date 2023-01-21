@@ -15,7 +15,7 @@ jobs:
       - name: Get Lates code
         uses: actions/checkout@v1
         with:
-          fetch-depth: 1
+          fetch-depth: 2
           ref: ${{github.ref_name}}
 
       - name: List output files
