@@ -27,8 +27,10 @@ jobs:
 
       - name: List all changed files
         run: |
+          rem ./temp/*
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
+            cp --parents $file ./temp/
           done      
 
       - name: List output files
@@ -50,6 +52,6 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_path: file
+          local_path: ./temp/*
           remote_path: ${{ env.REMOTE_SRV_PATH }}
           sftp_only: true
