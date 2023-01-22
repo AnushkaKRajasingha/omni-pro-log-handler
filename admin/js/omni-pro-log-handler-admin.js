@@ -30,3 +30,4 @@
 	 */
 
 })( jQuery );
+// Test inside file

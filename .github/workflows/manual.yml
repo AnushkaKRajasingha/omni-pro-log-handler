@@ -15,8 +15,25 @@ jobs:
       - name: Get Lates code
         uses: actions/checkout@v1
         with:
-          fetch-depth: 1
+          fetch-depth: 2
           ref: ${{github.ref_name}}
+
+      - name: Diff
+        run: git diff HEAD^ HEAD
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v35
+
+      - name: List all changed files
+        run: |
+          mkdir ./temp
+          ls -l
+          rm -rf ./temp/*
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+            cp --parents $file ./temp/
+          done      
 
       - name: List output files
         run: ls
@@ -37,5 +54,10 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          local_path: ./temp/*
           remote_path: ${{ env.REMOTE_SRV_PATH }}
           sftp_only: true
+
+      - name: Remove temp directory
+        run: |
+          rm -rf ./temp
