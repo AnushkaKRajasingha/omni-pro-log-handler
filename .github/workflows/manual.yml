@@ -28,7 +28,8 @@ jobs:
       - name: List all changed files
         run: |
           mkdir ./temp
-          rm -r ./temp/*
+          ls -l
+          rm -rf ./temp/*
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
             cp --parents $file ./temp/
