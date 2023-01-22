@@ -27,7 +27,8 @@ jobs:
 
       - name: List all changed files
         run: |
-          rem ./temp/*
+          mkdir ./temp
+          rm -r ./temp/*
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
             cp --parents $file ./temp/
@@ -55,3 +56,7 @@ jobs:
           local_path: ./temp/*
           remote_path: ${{ env.REMOTE_SRV_PATH }}
           sftp_only: true
+
+      - name: Remove temp directory
+        run: |
+          rm -rf ./temp
